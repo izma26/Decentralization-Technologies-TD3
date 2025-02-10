@@ -1,0 +1,44 @@
+
+
+
+
+<!-- templates/predict.html-->
+ 
+<html>
+ 
+<head>
+    <title>Handling of http get and post request</title>
+    <style>
+        div {
+            width: 400px;
+            border: 1px solid green;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <div>
+        <h1>Handle POST Request</h1>
+        <form method="POST"
+              action="{{ url_for('predict') }}">
+            <input type="number"
+              name="sepal_length"
+              placeholder="Length">
+            <input type="number"
+                    name="sepal_width"
+                    placeholder="Width">
+            <input type="number"
+                   name="petal_length"
+                   placeholder="Length">
+            <input type="number"
+                   name="petal_width"
+                   placeholder="Width">
+            <button type="Send">submit</button>
+        </form>
+    </div>
+</body>
+ 
+</html>

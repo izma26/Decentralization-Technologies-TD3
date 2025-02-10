@@ -1,44 +1,68 @@
-
-
-
-
-<!-- templates/predict.html-->
- 
-<html>
- 
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-    <title>Handling of http get and post request</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction de l'Espèce de la Fleur</title>
     <style>
-        div {
-            width: 400px;
-            border: 1px solid green;
-            padding: 10px;
-            margin-bottom: 5px;
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            display: inline-block;
+            border: 2px solid #333;
+            background-color: #f9f9f9;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
         }
     </style>
 </head>
- 
 <body>
- 
-    <div>
-        <h1>Handle POST Request</h1>
-        <form method="POST"
-              action="{{ url_for('predict') }}">
-            <input type="number"
-              name="sepal_length"
-              placeholder="Length">
-            <input type="number"
-                    name="sepal_width"
-                    placeholder="Width">
-            <input type="number"
-                   name="petal_length"
-                   placeholder="Length">
-            <input type="number"
-                   name="petal_width"
-                   placeholder="Width">
-            <button type="Send">submit</button>
+    {% if show_form %}
+        <h2>Prédire l'Espèce de la Fleur</h2>
+
+        <form action="/predict" method="post">
+            <label for="sepal_length">Longueur du Sépale (cm) :</label>
+            <input type="text" id="sepal_length" name="sepal_length" required>
+            <br>
+            <label for="sepal_width">Largeur du Sépale (cm) :</label>
+            <input type="text" id="sepal_width" name="sepal_width" required>
+            <br>
+            <label for="petal_length">Longueur du Pétale (cm) :</label>
+            <input type="text" id="petal_length" name="petal_length" required>
+            <br>
+            <label for="petal_width">Largeur du Pétale (cm) :</label>
+            <input type="text" id="petal_width" name="petal_width" required>
+            <br>
+            <button type="submit">Prédire</button>
         </form>
-    </div>
+    {% else %}
+        {% if prediction %}
+            <div class="result-box">
+                Espèce prédite : <strong>{{ prediction }}</strong>
+            </div>
+            <br>
+            <a href="/" class="back-button">Faire une nouvelle prédiction</a>
+        {% endif %}
+    {% endif %}
 </body>
- 
 </html>
